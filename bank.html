@@ -75,6 +75,10 @@
             document.getElementById("depositInput").value;
           const depositValue = parseFloat(currentDepositAmount);
           console.log(depositValue);
+          if (isNaN(depositValue)) {
+            alert("Please provide a valid number");
+            return;
+          }
 
           const previousDepositAmount = document.getElementById("depositField");
           const previousDeposit = parseFloat(previousDepositAmount.innerText);
@@ -99,20 +103,29 @@
             document.getElementById("withdrawInput").value;
           const withdrawValue = parseFloat(currentWithdrawAmount);
           console.log(withdrawValue);
+          if (isNaN(withdrawValue)) {
+            alert("Please provide a valid number");
+            return;
+          }
 
           const previousWithdrawAmount =
             document.getElementById("withdrawField");
           const previousWithdraw = parseFloat(previousWithdrawAmount.innerText);
           console.log(previousWithdraw);
 
-          const currentWithdrawTotal = withdrawValue + previousWithdraw;
-          console.log(currentWithdrawTotal);
-          previousWithdrawAmount.innerText = currentWithdrawTotal;
+          const previousBalance = document.getElementById("BalanceAmount");
+          const previoustotalAmount = parseFloat(previousBalance.innerText);
 
           document.getElementById("withdrawInput").value = "";
 
-          const previousBalance = document.getElementById("BalanceAmount");
-          const previoustotalAmount = parseFloat(previousBalance.innerText);
+          if (withdrawValue > previoustotalAmount) {
+            alert("tomar bap ar bank a ato taka nai");
+            return;
+          }
+
+          const currentWithdrawTotal = withdrawValue + previousWithdraw;
+          previousWithdrawAmount.innerText = currentWithdrawTotal;
+
           const newTotalAmount = previoustotalAmount - withdrawValue;
           previousBalance.innerText = newTotalAmount;
         });
